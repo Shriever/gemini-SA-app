@@ -36,7 +36,9 @@ export async function getSeekingAlphaData() {
 
   //   const earningsData = await getEarnings(medpId);
 
-  await getPressRelease(symbol);
+  // const pressRelease = await getPressRelease(symbol);
+
+  const callTranscript = await getCallTranscript(symbol);
 }
 
 // @Params: symbol -> stock symbol is used to get the internal company id
@@ -67,7 +69,54 @@ async function getSymbolId(symbol: string) {
 }
 
 async function getCallTranscript(symbol: string) {
+  const callTranscriptListUrl =
+    'https://seeking-alpha.p.rapidapi.com/transcripts/v2/list';
 
+  const callTranscriptListOptions = {
+    method: 'GET',
+    url: callTranscriptListUrl,
+    params: {
+      id: symbol,
+      size: '2',
+      number: '1',
+    },
+    headers,
+  };
+
+  const listResponse = await makeCallToSeekingAlpha(callTranscriptListOptions);
+
+  const callTranscriptId = listResponse.data?.['0']?.id;
+  if (!callTranscriptId) {
+    throw new Error(
+      'Could not get list of call transcripts from Seeking Alpha'
+    );
+  }
+
+  const callTranscriptDetailsUrl =
+    'https://seeking-alpha.p.rapidapi.com/transcripts/v2/get-details';
+
+  const callTranscriptDetailsOptions = {
+    method: 'GET',
+    url: callTranscriptDetailsUrl,
+    params: {
+      id: callTranscriptId,
+    },
+    headers,
+  };
+
+  const detailsResponse = await makeCallToSeekingAlpha(
+    callTranscriptDetailsOptions
+  );
+
+  const callTranscriptHTML = detailsResponse.data?.attributes?.content;
+  if (!callTranscriptHTML) {
+    throw new Error('Could not get call transcript from Seeking Alpha');
+  }
+
+  const callTranscriptText = htmlToText(callTranscriptHTML);
+
+  console.log(callTranscriptText)
+  return callTranscriptText;
 }
 
 async function getPressRelease(symbol: string) {
@@ -108,9 +157,7 @@ async function getPressRelease(symbol: string) {
 
   const detailsResponse = await makeCallToSeekingAlpha(
     pressReleaseDetailsOptions
-  ).catch(err => {
-    throw new Error(err);
-  });
+  );
 
   const pressReleaseText = detailsResponse?.data?.attributes?.content;
 
