@@ -1,3 +1,5 @@
 Things to research
 - What is npm vs npx
 - Why use axios over fetch
+- What is nock
+- What is cross-env
