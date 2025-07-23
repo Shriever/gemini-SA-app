@@ -1,5 +1,7 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
+import { truncateLongText } from '../utils/truncateLongText';
+import { htmlToText } from '../utils/htmlToText';
 
 dotenv.config();
 
@@ -32,7 +34,9 @@ export async function getSeekingAlphaData() {
 
   // const stockId = await getSymbolId(symbol);
 
-  const earningsData = await getEarnings(medpId);
+  //   const earningsData = await getEarnings(medpId);
+
+  await getPressRelease(symbol);
 }
 
 // @Params: symbol -> stock symbol is used to get the internal company id
@@ -62,18 +66,67 @@ async function getSymbolId(symbol: string) {
   return id;
 }
 
+async function getCallTranscript(symbol: string) {
+
+}
+
+async function getPressRelease(symbol: string) {
+  const pressReleaseListUrl =
+    'https://seeking-alpha.p.rapidapi.com/press-releases/v2/list';
+
+  const pressReleaseListOptions = {
+    method: 'GET',
+    url: pressReleaseListUrl,
+    params: {
+      id: symbol,
+      size: '1',
+      number: '1',
+    },
+    headers,
+  };
+
+  const listResponse = await makeCallToSeekingAlpha(pressReleaseListOptions);
+
+  const pressReleaseId = listResponse?.data?.[0]?.id ?? undefined;
+
+  if (!pressReleaseId) {
+    throw new Error('Could not get press release list from Seeking Alpha');
+  }
+
+  const medpPressReleaseId = '20172455';
+  const pressReleaseDetailsUrl =
+    'https://seeking-alpha.p.rapidapi.com/press-releases/get-details';
+
+  const pressReleaseDetailsOptions = {
+    method: 'GET',
+    url: pressReleaseDetailsUrl,
+    params: {
+      id: medpPressReleaseId,
+    },
+    headers,
+  };
+
+  const detailsResponse = await makeCallToSeekingAlpha(
+    pressReleaseDetailsOptions
+  ).catch(err => {
+    throw new Error(err);
+  });
+
+  const pressReleaseText = detailsResponse?.data?.attributes?.content;
+
+  const providerName =
+    detailsResponse?.included?.['0']?.attributes?.providerName;
+
+  /*
+    console.log(`
+    Provider Name: ${providerName}
+    Press Release Text: ${htmlToText(pressReleaseText)}`);
+  */
+}
+
 // @params: companyId -> Internal id used in place of stock symbol
 // Returns: Object with 5 points of earnings data
 async function getEarnings(companyId: string) {
-  /**
-   * Data Fields Required
-   * response.estimates["<companyId>"]
-   * - Announcement date: ["<some_id>"]["eps_normalized_actual"]["0"]["0"]["period"]["advancedate"]
-   * - EPS Normalized Actual:data["<some_id>"]["eps_normalized_actual"]["0"]["0"]["dataitemvalue"]
-   * - EPS GAAP Actual: data["<some_id>"]["eps_gaap_actual"]["0"]["0"]["dataitemvalue"]
-   * - Revenue Actual: data["<some_id>"]["revenue_actual"]["0"]["0"]["dataitemvalue"]
-   * - Revenue Surprise: revenue_actual["0"][0].dataitemvalue - revenue_consensus_mean["0"][0].dataitemvalue
-   */
   const earningsUrl =
     'https://seeking-alpha.p.rapidapi.com/symbols/get-earnings';
   const earningsOptions = {
@@ -119,7 +172,7 @@ async function getEarnings(companyId: string) {
     };
 
     const revenueSurprise = actuals.revenueActual - actuals.revenueEstimate;
-
+    /*
     console.log(`
         Announcement Date: ${actuals.announcementDate}
         EPS Normalized Actual: ${actuals.epsNormalized}
@@ -127,7 +180,7 @@ async function getEarnings(companyId: string) {
         Revenue Actual: ${actuals.revenueActual}
         Revenue Surprise: ${revenueSurprise}
         `);
-
+*/
     return {
       announcementDate: actuals.announcementDate,
       epsNormalizedActual: actuals.epsNormalized,
@@ -143,10 +196,10 @@ async function getEarnings(companyId: string) {
 async function makeCallToSeekingAlpha(options: any) {
   try {
     const response = await axios.request(options);
-    console.log(response.data);
+    // console.log(response);
+
     return response.data;
   } catch (error) {
-    console.error(error);
     throw new Error(error as string);
   }
 }
