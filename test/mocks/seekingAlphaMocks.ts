@@ -6,7 +6,12 @@ export const mockEarningsResponse = {
   estimates: {
     '568851': {
       eps_normalized_actual: {
-        '0': [{ dataitemvalue: '3.10', advancedate: '2025-07-21' }],
+        '0': [
+          {
+            dataitemvalue: '3.10',
+            period: { advancedate: '2025-07-21T20:15:00.000-04:00' },
+          },
+        ],
       },
       eps_gaap_actual: {
         '0': [{ dataitemvalue: '3.10' }],
@@ -21,9 +26,7 @@ export const mockEarningsResponse = {
   },
 };
 
-export const mockPressReleaseList = [
-  { id: '20172455' }
-];
+export const mockPressReleaseList = { data: [{ id: '20172455' }] };
 
 export const mockPressReleaseDetails = {
   data: {
@@ -40,9 +43,7 @@ export const mockPressReleaseDetails = {
   ],
 };
 
-export const mockTranscriptList = [
-  { id: '12345678' }
-];
+export const mockTranscriptList = { data: [{ id: '12345678' }] };
 
 export const mockTranscriptDetails = {
   data: {

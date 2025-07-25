@@ -37,7 +37,7 @@ export async function getEarnings(companyId: string) {
 
   return {
     announcementDate:
-      estimates.eps_normalized_actual?.['0']?.[0]?.advancedate ?? 'Unknown',
+      estimates.eps_normalized_actual?.['0']?.[0]?.period?.advancedate ?? 'Unknown',
     epsNormalizedActual: extractValue(estimates.eps_normalized_actual),
     epsGAAPActual: extractValue(estimates.eps_gaap_actual),
     revenueActual: extractValue(estimates.revenue_actual),

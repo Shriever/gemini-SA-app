@@ -22,17 +22,6 @@ describe('SeekingAlpha Service Layer', () => {
   });
 
   it('getEarnings returns parsed earnings data', async () => {
-    const mockEarnings = {
-      estimates: {
-        '568851': {
-          eps_normalized_actual: { '0': [{ dataitemvalue: '3.10', advancedate: '2025-07-21' }] },
-          eps_gaap_actual: { '0': [{ dataitemvalue: '3.10' }] },
-          revenue_actual: { '0': [{ dataitemvalue: '603310000.00' }] },
-          revenue_consensus_mean: { '0': [{ dataitemvalue: '538780000.00' }] }
-        }
-      }
-    };
-
     nock(baseUrl)
       .get('/symbols/get-earnings')
       .query(true)
@@ -40,7 +29,7 @@ describe('SeekingAlpha Service Layer', () => {
 
     const result = await service.getEarnings('568851');
     expect(result).to.deep.equal({
-      announcementDate: '2025-07-21',
+      announcementDate: '2025-07-21T20:15:00.000-04:00',
       epsNormalizedActual: 3.10,
       epsGAAPActual: 3.10,
       revenueActual: 603310000.00,
