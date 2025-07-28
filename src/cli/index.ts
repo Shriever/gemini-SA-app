@@ -1,6 +1,6 @@
 import readline from 'readline';
 import * as service from '../api/seekingAlphaService';
-// import { generateGeminiPrompt, sendToGemini } from '../services/geminiService';
+import { generateGeminiPrompt, sendToGemini } from '../api/geminiService';
 
 async function promptUser(question: string): Promise<string> {
   const rl = readline.createInterface({
@@ -26,12 +26,18 @@ async function promptYesNo(question: string): Promise<boolean> {
 
 export async function run() {
   console.log('\tWelcome to the Seeking Alpha Gemini Assistant.');
-  console.log('--------------------------------------------------------------\n')
+  console.log(
+    '--------------------------------------------------------------\n'
+  );
   const mode = await promptUser(
     'Choose output mode (1 = Gemini Prompt only, 2 = Gemini Prompt + Gemini Output): '
   );
 
-  console.log(`\n\tYou Selected: Gemini Prompt ${(mode == '2') ? '+ Gemini Output' : 'only'}\n`);
+  console.log(
+    `\n\tYou Selected: Gemini Prompt ${
+      mode == '2' ? '+ Gemini Output' : 'only'
+    }\n`
+  );
 
   let symbol = await promptUser('Enter the stock symbol (e.g. AAPL): ');
   let symbolId: string | null = null;
@@ -62,7 +68,7 @@ export async function run() {
 
   try {
     callTranscript = await service.getCallTranscript(symbol);
-    console.log('\t✅ Call transcript retrieved.\n');
+    console.log('\t✅ Call transcript retrieved.');
   } catch (e) {
     missing.push('call transcript');
     console.log('\t⚠️  Failed to retrieve call transcript.\n');
@@ -76,24 +82,27 @@ export async function run() {
     console.log('\t⚠️  Failed to retrieve press release.\n');
   }
 
-  //   const geminiPrompt = generateGeminiPrompt({ earningsData, callTranscript, pressRelease });
-  const geminiPrompt = 'gemini prompt example';
+  const geminiPrompt = generateGeminiPrompt({
+    earningsData,
+    callTranscript,
+    pressRelease,
+    symbol
+  });
   console.log('\n--- Gemini Prompt ---\n');
   console.log(geminiPrompt);
 
   if (mode === '2') {
     const confirmed = await promptYesNo(
-      '\nIs the above prompt acceptable? Proceed with sending to Gemini?'
+      '\nProceed with sending to Gemini?'
     );
     if (confirmed) {
-      //   const geminiResponse = await sendToGemini(geminiPrompt);
-      const geminiResponse = 'gemini response example';
+      const geminiResponse = await sendToGemini(geminiPrompt);
       console.log('\n--- Gemini Output ---\n');
       console.log(geminiResponse);
     } else {
       console.log('❌ Operation cancelled.');
     }
   } else {
-    console.log('\nYou chose to only receive the Gemini prompt.');
+    console.log('\nEND OF PROMPT.');
   }
 }

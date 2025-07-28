@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import nock from 'nock';
 import * as service from '../src/api/seekingAlphaService';
 import * as mocks from './mocks/seekingAlphaMocks';
+import { EarningsData } from '../types/earnings';
 
 describe('SeekingAlpha Service Layer', () => {
     const symbol = 'medp';
@@ -27,7 +28,7 @@ describe('SeekingAlpha Service Layer', () => {
       .query(true)
       .reply(200, mocks.mockEarningsResponse);
 
-    const result = await service.getEarnings('568851');
+    const result: EarningsData = await service.getEarnings('568851');
     expect(result).to.deep.equal({
       announcementDate: '2025-07-21T20:15:00.000-04:00',
       epsNormalizedActual: 3.10,
