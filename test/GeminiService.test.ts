@@ -28,7 +28,7 @@ describe('Gemini Service', () => {
         callTranscript: null,
         pressRelease: null,
         symbol,
-      })
+      }).prompt
     ).to.include(earningsText);
     expect(
       generateGeminiPrompt({
@@ -36,7 +36,7 @@ describe('Gemini Service', () => {
         callTranscript,
         pressRelease: null,
         symbol,
-      })
+      }).prompt
     ).to.include(callTranscript);
     expect(
       generateGeminiPrompt({
@@ -44,7 +44,7 @@ describe('Gemini Service', () => {
         callTranscript: null,
         pressRelease,
         symbol,
-      })
+      }).prompt
     ).to.include(pressRelease);
 
     expect(
@@ -53,7 +53,7 @@ describe('Gemini Service', () => {
         callTranscript,
         pressRelease,
         symbol,
-      })
+      }).prompt
     )
       .to.include(pressRelease)
       .and.to.include(callTranscript)

@@ -82,19 +82,19 @@ export async function run() {
     console.log('\t⚠️  Failed to retrieve press release.\n');
   }
 
-  const geminiPrompt = generateGeminiPrompt({
+  const geminiPrompts = generateGeminiPrompt({
     earningsData,
     callTranscript,
     pressRelease,
     symbol,
   });
   console.log('\n--- Gemini Prompt ---\n');
-  console.log(geminiPrompt);
+  console.log(geminiPrompts.truncatedPrompt);
 
   if (mode === '2') {
     const confirmed = await promptYesNo('\nProceed with sending to Gemini?');
     if (confirmed) {
-      const geminiResponse = await sendToGemini(geminiPrompt);
+      const geminiResponse = await sendToGemini(geminiPrompts.prompt);
       console.log('\n--- Gemini Output ---\n');
       console.log(geminiResponse);
     } else {
