@@ -62,5 +62,5 @@ export async function sendToGemini(geminiPrompt: string) {
     contents: geminiPrompt,
   });
 
-  return response.text;
+  return response.text?.replace(/\*/g, "");
 }
