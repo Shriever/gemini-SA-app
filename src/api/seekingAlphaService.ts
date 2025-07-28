@@ -1,4 +1,3 @@
-// src/api/seekingAlphaService.ts
 import { makeSeekingAlphaCall } from './seekingAlphaClient';
 import { htmlToText } from '../utils/htmlToText';
 
@@ -37,7 +36,8 @@ export async function getEarnings(companyId: string) {
 
   return {
     announcementDate:
-      estimates.eps_normalized_actual?.['0']?.[0]?.period?.advancedate ?? 'Unknown',
+      estimates.eps_normalized_actual?.['0']?.[0]?.period?.advancedate ??
+      'Unknown',
     epsNormalizedActual: extractValue(estimates.eps_normalized_actual),
     epsGAAPActual: extractValue(estimates.eps_gaap_actual),
     revenueActual: extractValue(estimates.revenue_actual),
@@ -47,10 +47,9 @@ export async function getEarnings(companyId: string) {
   };
 }
 
-// Add similar structure for getCallTranscript, getPressRelease
 export async function getCallTranscript(symbol: string) {
-      const listResponse = await makeSeekingAlphaCall({
-        method: 'GET',
+  const listResponse = await makeSeekingAlphaCall({
+    method: 'GET',
     url: 'https://seeking-alpha.p.rapidapi.com/transcripts/v2/list',
     params: {
       id: symbol,
@@ -66,10 +65,10 @@ export async function getCallTranscript(symbol: string) {
     );
   }
 
-    const detailsResponse = await makeSeekingAlphaCall({
-        method: 'GET',
+  const detailsResponse = await makeSeekingAlphaCall({
+    method: 'GET',
     url: 'https://seeking-alpha.p.rapidapi.com/transcripts/v2/get-details',
-params: {
+    params: {
       id: callTranscriptId,
     },
   });
@@ -83,11 +82,11 @@ params: {
 }
 
 export async function getPressRelease(symbol: string) {
-    const listResponse = await makeSeekingAlphaCall({
-        method: 'GET',
+  const listResponse = await makeSeekingAlphaCall({
+    method: 'GET',
     url: 'https://seeking-alpha.p.rapidapi.com/press-releases/v2/list',
     params: {
-    id: symbol,
+      id: symbol,
       size: '1',
       number: '1',
     },
@@ -99,14 +98,12 @@ export async function getPressRelease(symbol: string) {
     throw new Error('Could not get press release list from Seeking Alpha');
   }
 
-  const medpPressReleaseId = '20172455'; //TODO for testing purposes
-
-      const detailsResponse = await makeSeekingAlphaCall({
-        method: 'GET',
+  const detailsResponse = await makeSeekingAlphaCall({
+    method: 'GET',
     url: 'https://seeking-alpha.p.rapidapi.com/press-releases/get-details',
     params: {
-      id: medpPressReleaseId,
-    }
+      id: pressReleaseId,
+    },
   });
 
   const pressReleaseText = detailsResponse?.data?.attributes?.content;

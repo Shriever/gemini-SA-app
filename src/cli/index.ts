@@ -86,15 +86,13 @@ export async function run() {
     earningsData,
     callTranscript,
     pressRelease,
-    symbol
+    symbol,
   });
   console.log('\n--- Gemini Prompt ---\n');
   console.log(geminiPrompt);
 
   if (mode === '2') {
-    const confirmed = await promptYesNo(
-      '\nProceed with sending to Gemini?'
-    );
+    const confirmed = await promptYesNo('\nProceed with sending to Gemini?');
     if (confirmed) {
       const geminiResponse = await sendToGemini(geminiPrompt);
       console.log('\n--- Gemini Output ---\n');
