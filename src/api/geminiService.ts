@@ -42,7 +42,7 @@ Use only official post‑earnings sources:
 ⛔ Ignore pre‑earnings content
 
 ✅ Ticker:  ${symbol.toUpperCase()}
-✅ Earnings Date: 2025‑07‑17
+✅ Earnings Date: ${earningsData?.announcementDate}
 
 ${earningsData ? `Earnings data: ${earningsText}` : ''}
 
