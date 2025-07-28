@@ -1,7 +1,12 @@
-import { GoogleGenAI } from "@google/genai";
-import {GenerateGeminiPrompt} from "../../types/prompts"
+import { GoogleGenAI } from '@google/genai';
+import { GenerateGeminiPrompt } from '../../types/prompts';
 
-export function generateGeminiPrompt({ earningsData, callTranscript, pressRelease, symbol }: GenerateGeminiPrompt): string {
+export function generateGeminiPrompt({
+  earningsData,
+  callTranscript,
+  pressRelease,
+  symbol,
+}: GenerateGeminiPrompt): string {
   let earningsText: string | null = null;
 
   if (earningsData) {
@@ -11,9 +16,9 @@ export function generateGeminiPrompt({ earningsData, callTranscript, pressReleas
       epsGAAPActual: $${earningsData.epsGAAPActual}
       revenueActual: $${earningsData.revenueActual}
       revenueSurprise: $${earningsData.revenueSurprise}
-    `
+    `;
   }
-    const prompt =  `
+  const prompt = `
 🟦 EP‑PEADS UNIVERSAL EXECUTION PROMPT
 
 If the press release and transcript are provided, use them  
@@ -39,25 +44,23 @@ Use only official post‑earnings sources:
 ✅ Ticker:  ${symbol.toUpperCase()}
 ✅ Earnings Date: 2025‑07‑17
 
-${earningsData ? `Earnings data: ${earningsText}`: ''}
+${earningsData ? `Earnings data: ${earningsText}` : ''}
 
-${callTranscript ? `Call Transcript: ${callTranscript}`: ''}
+${callTranscript ? `Call Transcript: ${callTranscript}` : ''}
 
-${pressRelease ? `Press Release: ${pressRelease}`: ''}
+${pressRelease ? `Press Release: ${pressRelease}` : ''}
 `;
 
-return prompt;
-
+  return prompt;
 }
 
 export async function sendToGemini(geminiPrompt: string) {
   const ai = new GoogleGenAI({});
 
   const response = await ai.models.generateContent({
-    model: "gemini-2.5-flash",
+    model: 'gemini-2.5-flash',
     contents: geminiPrompt,
   });
 
-    return response.text;
-
+  return response.text;
 }
