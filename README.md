@@ -62,7 +62,6 @@ npm run start
   *.test.ts       # Unit tests
 /types          # Shared TypeScript interfaces
 ```
-
 ## Example Output
 ```bash
 npm run start
@@ -128,58 +127,59 @@ Press Release: Stocks climbed to more records on Wall Street. The S&P 500 rose 0
 Proceed with sending to Gemini? (y, N): y
 
 --- Gemini Output ---
-```bash
-**Intel Corporation (INTC) Q2 2025 Earnings Summary**
 
-Intel (NASDAQ: INTC) reported its second-quarter 2025 financial results on July 24, 2025, exceeding revenue expectations and demonstrating underlying operational strength despite one-time charges. The company continued to advance its strategic priorities, focusing on organizational efficiency, foundry transformation, core x86 performance, and AI strategy.
+Intel (INTC) Q2 2025 Earnings Summary
 
-**Q2 2025 Financial Highlights:**
+Intel reported its Q2 2025 earnings on July 24, 2025, with revenue above the high end of its guidance, driven by strong demand across client and data center segments. Headline profitability was impacted by one-time items and impairments, but underlying operating performance showed improvement.
 
-*   **Revenue:** $12.9 billion, exceeding the high end of guidance and representing a surprise of $977.2 million above consensus estimates.
-*   **Non-GAAP EPS:** -$0.10 per share. Excluding approximately $800 million in non-cash impairment and accelerated depreciation charges and $200 million in one-time period costs, non-GAAP EPS would have been $0.10, which was ahead of the company\'s Q2 guidance for breakeven.
-*   **GAAP EPS:** -$0.67 per share.
-*   **Non-GAAP Gross Margin:** 29.7%. Excluding the aforementioned one-time charges, non-GAAP gross margin would have been 37.5%, ahead of Q2 guidance of 36.5%.
-*   **Operating Cash Flow:** $2.1 billion.
-*   **Adjusted Free Cash Flow:** -$1.1 billion, reflecting gross CapEx of $4.5 billion and net CapEx of $3.1 billion.
-*   **Cash and Short-term Investments:** $21.2 billion.
+Q2 2025 Financial Highlights (Actuals):
 
-**Segment Performance (Q2 2025):**
+   Revenue: $12.859 billion
+       Surprise: Beat by $977.2 million
+   Non-GAAP EPS: $-0.10
+   GAAP EPS: $-0.67
+   Non-GAAP Gross Margin: 29.7%
+       Excluding one-time charges and impairments, non-GAAP gross margin would have been 37.5%, and non-GAAP EPS would have been $0.10.
+   Operating Cash Flow: $2.1 billion
+   Gross CapEx: $4.5 billion
+   Net CapEx: $3.1 billion
+   Adjusted Free Cash Flow: Negative $1.1 billion
 
-*   **Intel Products:** Revenue of $11.8 billion, up slightly quarter-over-quarter and above expectations, driven by strength in client and server. Operating profit was $2.7 billion (23% of revenue), down sequentially due to period costs.
-    *   **Client Computing Group (CCG):** Revenue up 3% quarter-over-quarter, benefiting from PC refresh demand, growth in AI PCs, and upside in edge deployments.
-    *   **Data Center and AI (DCAI):** Revenue down 5% sequentially but above expectations, driven by variability in hyperscale demand partially offset by continued strength in host CPUs for AI servers and storage compute, and the ramp of Xeon 6 (Granite Rapids).
-*   **Intel Foundry:** Revenue of $4.4 billion, down 5% sequentially but above expectations, driven by better-than-forecasted output of Intel 7 wafers and increased advanced packaging services. The segment reported an operating loss of $3.2 billion, primarily due to $800 million in impairment charges.
-*   **All Other:** Revenue came in at $1.1 billion, up 12% sequentially, with an operating profit of $69 million from Mobileye, Altera, and IMS.
+Source: Provided Earnings Data, Intel Q2 2025 Earnings Conference Call Transcript
 
-**Guidance & Outlook:**
+Q3 2025 Guidance (Non-GAAP):
 
-*   **Q3 2025 Revenue:** Forecasted range of $12.6 billion to $13.6 billion (midpoint $13.1 billion), reflecting an expected below-seasonal second half of 2025 due to potential customer purchasing behavior to mitigate tariff uncertainty.
-*   **Q3 2025 Non-GAAP Gross Margin:** Approximately 36%, primarily impacted by an increased mix of outsourced products (Lunar Lake ramp), the early ramp of Panther Lake, and increased costs associated with tariffs.
-*   **Q3 2025 Non-GAAP EPS:** Breakeven.
-*   **2025 OpEx:** On track for $17 billion.
-*   **2026 OpEx Target:** $16 billion.
-*   **2025 Gross Capital Investment:** Approximately $18 billion.
-*   **2025 Net CapEx:** $8 billion to $11 billion.
-*   **2026 CapEx:** Expected to be lower than $18 billion (but higher than $9 billion maintenance CapEx), driven by better utilization of construction in progress.
+   Revenue: $12.6 billion to $13.6 billion
+       Midpoint: $13.1 billion
+   Gross Margin: Approximately 36%
+   EPS: Breakeven
+   Tax Rate: 12%
 
-**Key Strategic Updates & Commentary (CEO Lip-Bu Tan):**
+Source: Intel Q2 2025 Earnings Conference Call Transcript
 
-*   **Organization and Culture:** Completed reviews to reduce inefficiencies and redundancies, aiming for a streamlined organization. Reduced management layers by approximately 50% and on track for a year-end target of 75,000 employees. Return-to-office mandate begins September.
-*   **Foundry Strategy:** Committed to transforming the manufacturing asset into a robust foundry business based on trust and consistent execution. Capacity growth will be based solely on volume commitments, deploying CapEx in lockstep with tangible milestones.
-    *   Canceled manufacturing projects in Germany and Poland.
-    *   Consolidating assembly/test operations from Costa Rica to Vietnam and Malaysia.
-    *   Slowing construction pace in Ohio, maintaining flexibility to accelerate if needed.
-    *   **Intel 18A:** Making steady progress on yield and performance targets, foundational for the next three generations of Intel client and server products. Panther Lake on track for launch this year.        
-    *   **Intel 14A:** Focus on foundational building blocks, designed as a foundry node from the ground up with direct input from external and internal customers. CapEx will only be deployed when confident of attractive returns driven by both Intel products and meaningful external customer demand.
-*   **Core x86 Franchise:**
-    *   **Client:** Top priority is delivering the first Panther Lake SKU by year-end, followed by more SKUs in 1H 2026. Encouraged by progress on Nova Lake (due end of 2026).
-    *   **Servers:** Granite Rapids ramping as planned. Focused on improving performance per watt for hyperscale workloads, correcting multi-threading capabilities, and bringing in new leadership for the data center business. Directing silicon and platform teams to define products with clean architectures, better cost structures, and simplified SKU stacks. Every major chip design requires CEO review and approval before tape-out.
-*   **AI Strategy:** Evolving approach beyond traditional silicon and training-centric mindset to a cohesive silicon-systems-software stack and strategy. Concentrating efforts on inference and agentic AI. Aiming to become the compute platform of choice and work towards a full-stack AI solution.
-*   **Balance Sheet:** Improving the balance sheet is paramount. Successfully monetized a portion of Mobileye ownership and on track to close the Altera transaction with Silver Lake. Last full fiscal year of positive adjusted free cash flow was 2021, which is unacceptable. Confidence in hitting OpEx targets and working to reduce capital spending in 2026.
+Full-Year 2025 Guidance:
 
-**Market Conditions:**
-While the economic landscape was uncertain in Q1, markets largely functioned normally in Q2. Strong demand in client was driven by the end of service for Windows 10 and aging COVID-era installed base, with AI PCs growing as a percentage of mix. In traditional servers, hyperscalers and enterprises continued CPU refreshes. The company noted that Q2 revenue likely benefited from customer purchasing behavior to mitigate tariff uncertainty.
+   Operating Expenses (OpEx): $17 billion (on track)
+   Gross Capital Investment (CapEx): Approximately $18 billion
+   Net CapEx: $8 billion to $11 billion
 
-**Post-Earnings Stock Movement:**
-Following the earnings announcement, Intel\'s stock (INTC) sank 8.5%, as reported by The Associated Press, which noted the company's announcement of job cuts as part of its turnaround efforts.
+Full-Year 2026 Targets:
+
+   Operating Expenses (OpEx): $16 billion (on track)
+   CapEx: Expected to be lower than 2025 (meaningfully higher than $9 billion, but less than $18 billion) 
+
+Source: Intel Q2 2025 Earnings Conference Call Transcript
+
+Analyst Reactions:
+   No specific analyst rating changes or price target adjustments were mentioned in the provided press release or transcript. (NA)
+
+Macro or Sector News Influencing Results:
+
+   Economic Landscape: While Q1 2025 saw increased economic uncertainty due to shifting trade policies, persistent inflation, and regulatory risks, Q2 markets "largely functioned normally," allowing fundamental demand drivers to manifest.
+   Tariff Uncertainty: Q2 revenue likely benefited from customer purchasing behavior to mitigate tariff uncertainty, although the exact quantification remains difficult.
+   PC Market: Continued solid demand in the client segment was driven by the end of service for Windows 10 and the aging COVID-era installed base. AI PCs are also growing as a percentage of the mix.
+   Server Market: Hyperscalers and enterprises continued to refresh their CPU installed base to leverage newer, more performance-per-watt efficient products.
+   Broader Market Performance: The broader Wall Street market saw significant gains, with the S&P 500, Dow Jones Industrial Average, and Nasdaq composite reaching new all-time highs during the week of Intel's earnings, reflecting a generally positive market sentiment.
+
+Source: Intel Q2 2025 Earnings Conference Call Transcript, Press Release
 ```
